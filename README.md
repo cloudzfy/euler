@@ -4,6 +4,7 @@ Copyright (C) 2016 Cloudzfy. All Rights Reserved.
 
 ========================================================
 
+![Leonhard Euler](https://raw.githubusercontent.com/cloudzfy/euler/master/img/euler_portrait.png)
 1. Multiples of 3 and 5
 1. Even Fibonacci numbers
 1. Largest prime factor
