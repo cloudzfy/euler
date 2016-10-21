@@ -17,19 +17,25 @@
 # Find the sum of all the positive integers which cannot be written as
 # the sum of two abundant numbers.
 
+from math import sqrt
+
 def is_abundant(num):
-	ret = 0
-	tmp = num
-	for p in range(1, num / 2 + 1):
-		if tmp % p == 0:
+	ret = 1
+	for p in range(2, int(sqrt(num)) + 1):
+		if num % p == 0:
 			ret += p
+			if num / p <> p:
+				ret += num / p
 	return ret > num
 
-abundant = filter(lambda x: is_abundant(x), range(12, 15000))
+abundant = set(filter(lambda x: is_abundant(x), range(12, 28123)))
 
-sums = []
-for i in abundant:
-	for j in abundant:
-		sums.append(i + j)
+def is_abundant_sum(num):
+	for i in abundant:
+		if num - i < 0:
+			break
+		if num - i in abundant:
+			return True
+	return False
 
-print sum(set(range(28123)) - set(sums))
+print sum(filter(lambda x: not is_abundant_sum(x), range(1, 28123)))
