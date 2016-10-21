@@ -3,7 +3,7 @@
 # 
 # Find the largest palindrome made from the product of two 3-digit numbers.
 
-def isPalindrome(num):
+def is_palindrome(num):
 	text = str(num)
 	i = 0
 	j = len(text) - 1
@@ -17,7 +17,7 @@ def isPalindrome(num):
 ans = 0
 for i in range(100, 1000):
 	for j in range(100, 1000):
-		if isPalindrome(i * j) and ans < i * j:
+		if is_palindrome(i * j) and ans < i * j:
 			ans = i * j
 
 print ans

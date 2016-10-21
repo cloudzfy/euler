@@ -18,18 +18,18 @@
 
 size = 100
 
-isPrime = [True for i in range(size)]
+is_prime = [True for i in range(size)]
 
 for i in range(2, size):
-	if isPrime[i]:
+	if is_prime[i]:
 		j = 2
 		while i * j < size:
-			isPrime[i * j] = False
+			is_prime[i * j] = False
 			j += 1
 
-primes = filter(lambda x: isPrime[x], range(3, size))
+primes = filter(lambda x: is_prime[x], range(3, size))
 
-def countFactors(num):
+def count_factors(num):
 	ret = 1
 	if num % 2 == 0:
 		count = 0
@@ -48,6 +48,6 @@ def countFactors(num):
 	return ret
 
 for i in range(2, 20000):
-	if countFactors(i - 1) * countFactors(i) > 500:
+	if count_factors(i - 1) * count_factors(i) > 500:
 		print (i - 1) * i / 2
 		break

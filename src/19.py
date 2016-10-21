@@ -17,21 +17,21 @@
 months1 = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 months2 = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-def isLeap(year):
+def is_leap(year):
 	if year % 100 == 0:
 		return year % 400 == 0
 	else:
 		return year % 4 == 0
 
 day = 1
-if isLeap(1900):
+if is_leap(1900):
 	day = (day + sum(months2)) % 7
 else:
 	day = (day + sum(months1)) % 7
 
 count = 0
 for year in range(1901, 2001):
-	for month in months2 if isLeap(year) else months1:
+	for month in months2 if is_leap(year) else months1:
 		if day == 0:
 			count += 1
 		day = (day + month) % 7

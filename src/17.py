@@ -14,7 +14,7 @@ nums2 = ['eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seve
 nums3 = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 nums4 = ['hundred', 'thousand', 'and']
 
-def sayNumber(num):
+def say_number(num):
 	text = ''
 	if num >= 1000:
 		text += nums1[num / 1000 - 1] + nums4[1]
@@ -39,6 +39,6 @@ def sayNumber(num):
 
 ans = 0
 for i in range(1, 1001):
-	ans += sayNumber(i)
+	ans += say_number(i)
 
 print ans

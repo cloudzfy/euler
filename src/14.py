@@ -15,7 +15,7 @@
 # NOTE: Once the chain starts the terms are allowed to go above one million.
 
 chains = {}
-def countChains(num):
+def count_chains(num):
 	count = 1
 	tmp = num
 	while tmp <> 1:
@@ -34,7 +34,7 @@ maxLen = 0
 ans = 0
 
 for i in range(1, 1000000):
-	thisLen = countChains(i)
+	thisLen = count_chains(i)
 	if maxLen < thisLen:
 		maxLen = thisLen
 		ans = i
