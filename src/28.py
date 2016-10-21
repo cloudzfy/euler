@@ -13,3 +13,15 @@
 # What is the sum of the numbers on the diagonals in a 1001 by 1001
 # spiral formed in the same way?
 
+def spiral_diagonal(n):
+	n -= 1
+	ret = 1
+	num = 1
+	add = 2
+	for i in range(n / 2):
+		ret += num * 4 + add * 10
+		num += add * 4
+		add += 2
+	return ret
+
+print spiral_diagonal(1001)
