@@ -4,6 +4,8 @@ Copyright (C) 2016 Cloudzfy. All Rights Reserved.
 
 ========================================================
 
+> "Project Euler exists to encourage, challenge, and develop the skills and enjoyment of anyone with an interest in the fascinating world of mathematics."
+
 ![Leonhard Euler](https://raw.githubusercontent.com/cloudzfy/euler/master/img/euler_portrait.png)
 
 1. Multiples of 3 and 5
