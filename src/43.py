@@ -15,3 +15,26 @@
 
 # Find the sum of all 0 to 9 pandigital numbers with this property.
 
+from itertools import permutations
+
+ans = []
+for perm in permutations('0123456789'):
+	if perm[0] == '0':
+		continue
+	if int(''.join(perm[1:4])) % 2 <> 0:
+		continue
+	if int(''.join(perm[2:5])) % 3 <> 0:
+		continue
+	if int(''.join(perm[3:6])) % 5 <> 0:
+		continue
+	if int(''.join(perm[4:7])) % 7 <> 0:
+		continue
+	if int(''.join(perm[5:8])) % 11 <> 0:
+		continue
+	if int(''.join(perm[6:9])) % 13 <> 0:
+		continue
+	if int(''.join(perm[7:10])) % 17 <> 0:
+		continue
+	ans.append(int(''.join(perm)))
+
+print sum(ans)
