@@ -20,14 +20,14 @@
 # n = 0.
 
 def generate_primes(limit):
-	isPrime = [True for i in range(limit)]
+	is_prime = [True for i in range(limit)]
 	for i in range(2, limit):
-		if isPrime[i]:
+		if is_prime[i]:
 			j = 2
 			while i * j < limit:
-				isPrime[i * j] = False
+				is_prime[i * j] = False
 				j += 1
-	return filter(lambda x: isPrime[x], range(2, limit))
+	return filter(lambda x: is_prime[x], range(2, limit))
 
 primes = set(generate_primes(1000000))
 b_candidates = generate_primes(1000)

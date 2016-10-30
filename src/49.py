@@ -14,12 +14,12 @@ from math import sqrt
 from itertools import permutations
 
 def generate_primes(limit):
-	isPrime = [True for i in range(limit)]
+	is_prime = [True for i in range(limit)]
 	for i in range(2, int(sqrt(limit))):
-		if isPrime[i]:
+		if is_prime[i]:
 			for j in range(i * i, limit, i):
-				isPrime[j] = False
-	return filter(lambda x: isPrime[x], range(1000, limit))
+				is_prime[j] = False
+	return filter(lambda x: is_prime[x], range(1000, limit))
 
 primes = set(generate_primes(9999))
 

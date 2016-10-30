@@ -21,7 +21,7 @@
 
 from random import randrange
 
-def isPrime_miller_rabin(num):
+def is_prime_miller_rabin(num):
 	if num == 2:
 		return True
 	if num % 2 == 0:
@@ -53,7 +53,7 @@ base = 1
 count = 0
 while True:
 	for i in range(1, 4):
-		if isPrime_miller_rabin(base + length * i):
+		if is_prime_miller_rabin(base + length * i):
 			count += 1
 	if count * 10 < length * 2 + 1:
 		break
