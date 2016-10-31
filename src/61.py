@@ -25,3 +25,35 @@
 # heptagonal, and octagonal, is represented by a different number in
 # the set.
 
+triangle = [n * (n + 1) / 2 for n in range(45, 141)]
+square = [n * n for n in range(32, 100)]
+pentagonal = [n * (3 * n - 1) / 2 for n in range(26, 82)]
+hexagonal = [n * (2 * n - 1) for n in range(23, 71)]
+heptagonal = [n * (5 * n - 3) / 2 for n in range(21, 64)]
+octagonal = [n * (3 * n - 2) for n in range(19, 59)]
+
+nums = [triangle, square, pentagonal, hexagonal, heptagonal, octagonal]
+visited = [False for x in range(6)]
+ans = [0 for x in range(6)]
+
+def is_cyclic(head, num):
+	if all(visited) and str(head)[:2] == str(num)[2:]:
+		return True
+	digits = str(num)[2:]
+	for i in range(1, 6):
+		if not visited[i]:
+			visited[i] = True
+			for n in nums[i]:
+				if str(n)[:2] == digits and is_cyclic(head, n):
+					ans[i] = n
+					return True
+			visited[i] = False
+	return False
+
+visited[0] = True
+for n in triangle:
+	if is_cyclic(n, n):
+		ans[0] = n
+		break
+
+print sum(ans)
