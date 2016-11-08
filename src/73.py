@@ -15,3 +15,16 @@
 # How many fractions lie between 1 / 3 and 1 / 2 in the
 # sorted set of reduced proper fractions for d <= 12,000?
 
+from fractions import gcd
+from math import ceil
+
+def get_fractions(d):
+	count = 0
+	i = int(ceil(float(d) / 3))
+	while 2 * i < d:
+		if gcd(i, d) == 1:
+			count += 1
+		i += 1
+	return count
+
+print sum([get_fractions(d) for d in range(4, 12001)])

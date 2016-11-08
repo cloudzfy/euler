@@ -14,3 +14,25 @@
 # By listing the set of reduced proper fractions for d <+ 1,000,000
 # in ascending order of size, find the numerator of the fraction
 # immediately to the left of 3 / 7.
+
+from fractions import gcd
+
+eps = 1e-12
+
+def get_numerator(d):
+	n = int(3.0 * d / 7 - eps)
+	while n > 0:
+		if gcd(n, d) == 1:
+			return n
+		n -= 1
+	return 0
+
+numerator = 0
+denominator = 1
+
+for d in range(2, 1000001):
+	n = get_numerator(d)
+	if numerator * d < n * denominator:
+		numerator, denominator = n, d
+
+print numerator

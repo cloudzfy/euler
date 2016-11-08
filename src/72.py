@@ -12,3 +12,16 @@
 
 # How many elements would be contained in the set of reduced
 # proper fractions for d <= 1,000,000?
+
+phi = range(1000001)
+ans = 0
+
+for i in range(2, len(phi)):
+	if phi[i] == i:
+		j = i
+		while j < len(phi):
+			phi[j] = phi[j] * (i - 1) / i
+			j += i
+	ans += phi[i]
+
+print ans
