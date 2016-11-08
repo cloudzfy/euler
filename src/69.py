@@ -28,17 +28,13 @@ def generate_primes(limit):
 				is_prime[j] = False
 	return filter(lambda x: is_prime[x], range(2, limit))
 
-limit = 1000000
-primes = generate_primes(limit)
-phi = range(0, limit)
+primes = generate_primes(1000)
+
+ans = 1
 
 for p in primes:
-	i = 2
-	while i * p <= limit:
-		phi[i * p - 1] -= i - 1
-		i += 1
+	if ans * p > 1000000:
+		break
+	ans *= p
 
-for i in range(1, len(phi)):
-	phi[i] = (i + 1) / phi[i]
-
-print phi.index(max(phi)) + 1
+print ans

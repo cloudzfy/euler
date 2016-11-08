@@ -12,3 +12,34 @@
 
 # Find the value of n, 1 < n < 107, for which phi(n) is a permutation
 # of n and the ratio n / phi(n) produces a minimum.
+
+from math import sqrt
+
+def generate_primes(limit):
+	is_prime = [True for i in range(limit)]
+	for i in range(2, int(sqrt(limit))):
+		if is_prime[i]:
+			for j in range(i * i, limit, i):
+				is_prime[j] = False
+	return filter(lambda x: is_prime[x], range(2, limit))
+
+primes = generate_primes(5000)
+
+def is_permutation(x, y):
+	return sorted(str(x)) == sorted(str(y))
+
+ans = 0
+val = 10000
+
+for a in primes:
+	for b in primes:
+		n = a * b
+		if n > 10000000:
+			continue
+		phi = (a - 1) * (b - 1)
+		if is_permutation(n, phi):
+			if float(n) / phi < val:
+				ans, val = n, float(n) / phi
+
+print ans
+
