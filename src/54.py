@@ -67,7 +67,7 @@ def get_card_values(cards):
 			ret[0] = 4
 	return ret
 
-file = open('../res/p054_poker.txt')
+file = open('../data/p054_poker.txt')
 ans = 0
 for line in file.readlines():
 	cards = line.split(' ')

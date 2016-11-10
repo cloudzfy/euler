@@ -18,7 +18,7 @@
 # it would take over twenty billion years to check them all. There is an
 # efficient algorithm to solve it. ;o)
 
-file = open('../res/p067_triangle.txt', 'r')
+file = open('../data/p067_triangle.txt', 'r')
 data = file.read()
 file.close()
 

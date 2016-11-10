@@ -15,7 +15,7 @@
 
 from math import sqrt
 
-file = open('../res/p042_words.txt', 'r')
+file = open('../data/p042_words.txt', 'r')
 data = file.read()
 file.close()
 

@@ -32,7 +32,7 @@
 
 from collections import Counter
 
-file = open('../res/p059_cipher.txt', 'r')
+file = open('../data/p059_cipher.txt', 'r')
 data = file.read()
 file.close()
 

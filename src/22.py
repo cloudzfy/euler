@@ -10,7 +10,7 @@
 
 # What is the total of all the name scores in the file?
 
-file = open('../res/p022_names.txt')
+file = open('../data/p022_names.txt')
 data = file.read()
 file.close()
 
