@@ -21,3 +21,30 @@
 # L <= 1,500,000 can exactly one integer sided right angle triangle
 # be formed?
 
+from math import sqrt
+from fractions import gcd
+
+L = {}
+limit = 1500000
+mlimit = int(sqrt(limit))
+
+for m in range(2, mlimit):
+	for n in range(1, m):
+		if gcd(m, n) == 1 and (n + m) % 2 == 1:
+			p = 2 * m * (m + n)
+			tmp = p
+			while tmp <= limit:
+				if tmp in L:
+					L[tmp] += 1
+				else:
+					L[tmp] = 1
+				tmp += p
+
+ans = 0
+
+for k, v in L.items():
+	if v == 1:
+		ans += 1
+
+print ans
+

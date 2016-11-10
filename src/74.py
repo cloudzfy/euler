@@ -25,3 +25,38 @@
 # How many chains, with a starting number below one million,
 # contain exactly sixty non-repeating terms?
 
+from math import factorial
+
+fac = [factorial(x) for x in range(0, 10)]
+
+def get_sum_of_factorial(num):
+	return sum([fac[int(x)] for x in str(num)])
+
+length = {}
+limit = 1000000
+for i in range(1, limit):
+	if i in length:
+		continue
+	seq = [i]
+	x = i
+	count = 1
+	while True:
+		x = get_sum_of_factorial(x)
+		if x in seq:
+			break
+		if x in length:
+			count += length[x]
+			break
+		count += 1
+		seq.append(x)
+	for j in seq:
+		if j not in length and j < limit:
+			length[j] = count
+		count -= 1
+
+ans = 0
+for k, v in length.items():
+	if v == 60:
+		ans += 1
+
+print ans
