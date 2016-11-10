@@ -11,3 +11,11 @@
 # How many different ways can one hundred be written as
 # a sum of at least two positive integers?
 
+dp = [0 for i in range(101)]
+dp[0] = 1
+
+for x in range(1, 100):
+	for i in range(x, len(dp)):
+		dp[i] += dp[i - x]
+
+print dp[-1]
