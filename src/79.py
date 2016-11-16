@@ -11,3 +11,29 @@
 # order, analyse the file so as to determine the shortest
 # possible secret passcode of unknown length.
 
+file = open('../data/p079_keylog.txt')
+data = file.read()
+file.close()
+
+keys = data.split('\n')[:-1]
+ans = []
+
+while len(keys) > 0:
+	head = set()
+	rest = set()
+	for k in keys:
+		head.add(k[0])
+		if len(k) > 1:
+			rest.add(k[1])
+			if len(k) > 2:
+				rest.add(k[2])
+	for i in head:
+		if i not in rest:
+			newkeys = []
+			for k in keys:
+				newkeys.append(k.replace(i, ''))
+			keys = [k for k in newkeys if len(k) > 0]
+			ans += i
+			break
+
+print ''.join(ans)

@@ -12,15 +12,26 @@
 
 # Find the least value of n for which p(n) is divisible by one million.
 
-n = 10000
+p = [1]
+n = 1
 
-dp = [0 for i in range(n + 1)]
-dp[0] = 1
-for x in range(1, n + 1):
-	for i in range(x, len(dp)):
-		dp[i] += dp[i - x]
+def sgn(x):
+	if x % 2 == 0:
+		return 1
+	else:
+		return -1
 
-for i in range(len(dp)):
-	if dp[i] % 1000000 == 0:
-		print i
-		break
+while p[-1] % 1000000 <> 0:
+	p.append(0)
+	i = 0
+	k = 1
+	g = k * (3 * k - 1) / 2
+	while g <= n:
+		p[n] += sgn(k - 1) * p[n - g]
+		i += 1
+		k = i / 2 + 1 if i % 2 == 0 else -int(i / 2) - 1
+		g = k * (3 * k - 1) / 2
+	p[n] %= 1000000
+	n += 1
+
+print n
