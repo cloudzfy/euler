@@ -14,3 +14,26 @@
 # a 80 by 80 matrix, from the top left to the bottom right
 # by only moving right and down.
 
+from copy import copy
+
+file = open('../data/p081_matrix.txt', 'r')
+data = file.read()
+file.close()
+
+matrix = [[int(x) for x in l.split(',')] for l in data.split('\n')[:-1]]
+
+limit = sum([sum(l) for l in matrix])
+
+n = len(matrix)
+m = len(matrix[0])
+dp = [[limit for x in range(m)] for y in range(n)]
+dp[0][0] = matrix[0][0]
+
+for x in range(n):
+	for y in range(m):
+		if x <> 0:
+			dp[x][y] = min(dp[x][y], matrix[x][y] + dp[x - 1][y])
+		if y <> 0:
+			dp[x][y] = min(dp[x][y], matrix[x][y] + dp[x][y - 1])
+
+print dp[n - 1][m - 1]

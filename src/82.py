@@ -13,3 +13,26 @@
 # "Save Link/Target As..."), a 31K text file containing a 80
 # by 80 matrix, from the left column to the right column.
 
+file = open('../data/p082_matrix.txt', 'r')
+data = file.read()
+file.close()
+
+matrix = [[int(x) for x in l.split(',')] for l in data.split('\n')[:-1]]
+limit = sum([sum(l) for l in matrix])
+
+n = len(matrix)
+m = len(matrix[0])
+dp = [[limit for x in range(m)] for y in range(n)]
+
+for y in range(m):
+	for x in range(n):
+		if y == 0:
+			dp[x][y] = matrix[x][y]
+		else:
+			dp[x][y] = matrix[x][y] + dp[x][y - 1]
+			if x <> 0:
+				dp[x][y] = min(dp[x][y], matrix[x][y] + matrix[x][y - 1] + dp[x - 1][y - 1])
+			if x <> n - 1:
+				dp[x][y] = min(dp[x][y], matrix[x][y] + matrix[x][y - 1] + dp[x + 1][y - 1])
+
+print min([l[-1] for l in dp])
