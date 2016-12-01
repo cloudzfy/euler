@@ -73,3 +73,68 @@
 # If, instead of using two 6-sided dice, two 4-sided dice are used,
 # find the six-digit modal string.
 
+from random import randrange
+
+GO = 0
+JAIL = 10
+G2J = 30
+CC1 = 2
+CC2 = 17
+CC3 = 33
+CH1 = 7
+CH2 = 22
+CH3 = 36
+C1 = 11
+E3 = 24
+H2 = 39
+R1 = 5
+U1 = 12
+U2 = 28
+
+dice_size = 4
+iterations = 1000000
+i = 0
+double_dice = 0
+pos = GO
+matrix = [0 for i in range(40)]
+
+CCpos = 0
+CHpos = 0
+
+CCcards = [GO, JAIL]
+CHcards = [GO, JAIL, C1, E3, H2, R1]
+
+while i < iterations:
+	i += 1
+	dice1 = randrange(dice_size) + 1
+	dice2 = randrange(dice_size) + 1
+	double_dice = double_dice + 1 if dice1 == dice2 else 0
+	if double_dice == 3:
+		pos = JAIL
+		matrix[pos] += 1
+		continue
+	pos = (pos + dice1 + dice2) % 40
+	if pos == G2J:
+		pos = JAIL
+	elif pos == CC1 or pos == CC2 or pos == CC3:
+		if CCpos < 2:
+			pos = CCcards[CCpos]
+		CCpos = (CCpos + 1) % 16
+	elif pos == CH1 or pos == CH2 or pos == CH3:
+		if CHpos < 6:
+			pos = CHcards[CHpos]
+		elif CHpos == 6 or CHpos == 7:
+			pos = ((pos + 5) / 10 * 10 + 5) % 40
+		elif CHpos == 8:
+			if pos >= U1 and pos < U2:
+				pos = U2
+			else:
+				pos = U1
+		elif CHpos == 9:
+			pos -= 3
+		CHpos = (CHpos + 1) % 16
+	matrix[pos] += 1
+
+tmp = {i: matrix[i] for i in range(40)}
+ans = [y[0] for y in sorted(tmp.items(), key=lambda x: x[1], reverse=True)[:3]]
+print ''.join([str(n).zfill(2) for n in ans])
