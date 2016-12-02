@@ -20,3 +20,17 @@
 # Find the least value of M such that the number of solutions
 # first exceeds one million.
 
+from math import sqrt
+
+M = 0
+limit = 1000000
+count = 0
+
+while count <= limit:
+	M += 1
+	for L in range(2, M * 2 + 1):
+		tmp = sqrt(M * M + L * L)
+		if tmp == int(tmp):
+			count += L / 2 if L <= M else M - (L - 1) / 2
+
+print M
