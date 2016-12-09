@@ -34,3 +34,26 @@
 # How many distinct arrangements of the two cubes allow for all
 # of the square numbers to be displayed?
 
+from itertools import combinations
+
+square_nums = [(0, 1), (0, 4), (0, 6), (1, 6), (2, 5), (3, 6), (4, 6), (1, 8)]
+
+def is_representable(x, y):
+	x = set([6 if i == 9 else i for i in x])
+	y = set([6 if i == 9 else i for i in y])
+	for num in square_nums:
+		if num[0] in x and num[1] in y:
+			continue
+		if num[0] in y and num[1] in x:
+			continue
+		return False
+	return True
+
+ans = 0
+
+for x in combinations(range(10), 6):
+	for y in combinations(range(10), 6):
+		if is_representable(x, y):
+			ans += 1
+
+print ans / 2

@@ -26,4 +26,23 @@
 # What is the sum of all the minimal product-sum numbers for
 # 2 <= k <= 12000?
 
+from math import log
+from itertools import combinations_with_replacement
 
+limit = 12000
+ans = [2 * k for k in range(12001)]
+
+N = int(log(limit * 2) / log(2))
+M = limit * 2
+
+for i in range(1, N + 1):
+	print i
+	for nums in combinations_with_replacement(range(2, M + 1), i):
+		prod = reduce(lambda x, y: x * y, nums)
+		if prod > limit:
+			continue
+		k = prod - sum(nums) + len(nums)
+		ans[k] = min(ans[k], prod)
+	M = M / 2
+
+print sum(ans[2:])

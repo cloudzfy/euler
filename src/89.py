@@ -28,3 +28,39 @@
 # Note: You can assume that all the Roman numerals in the file
 # contain no more than four consecutive identical units.
 
+romans = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+
+ones      = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
+tens      = ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC']
+hundreds  = ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM']
+thousands = ['', 'M', 'MM', 'MMM', 'MMMM']
+
+def roman_to_num(text):
+	ret = romans[text[-1]]
+	for i in range(1, len(text)):
+		if romans[text[i - 1]] < romans[text[i]]:
+			ret -= romans[text[i - 1]]
+		else:
+			ret += romans[text[i - 1]]
+	return ret
+
+def num_to_roman(num):
+	ret = thousands[num / 1000]
+	num %= 1000
+	ret += hundreds[num / 100]
+	num %= 100
+	ret += tens[num / 10]
+	num %= 10
+	ret += ones[num]
+	return ret
+
+file = open('../data/p089_roman.txt', 'r')
+data = file.read()
+file.close()
+
+ans = 0
+for x in data.split('\n'):
+	ans += len(x)
+	ans -= len(num_to_roman(roman_to_num(x)))
+
+print ans
