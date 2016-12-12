@@ -14,3 +14,20 @@
 # NOTE: The first two lines in the file represent the
 # numbers in the example given above.
 
+from math import log
+
+file = open('../data/p099_base_exp.txt', 'r')
+data = file.read()
+file.close()
+
+nums = [[int(x) for x in line.split(',')] for line in data.split('\n')[:-1]]
+
+max_num = 0
+idx = 0
+
+for i in range(len(nums)):
+	tmp = nums[i][1] * log(nums[i][0])
+	if tmp > max_num:
+		max_num, idx = tmp, i + 1
+
+print idx

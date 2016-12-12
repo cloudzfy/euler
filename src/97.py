@@ -9,3 +9,4 @@
 
 # Find the last ten digits of this prime number.
 
+print str(pow(2, 7830457, 10000000000) * 28433 + 1)[-10:]
