@@ -38,3 +38,41 @@
 # for example, 483 is the 3-digit number found in the top left
 # corner of the solution grid above.
 
+file = open('../data/p096_sudoku.txt', 'r')
+data = file.readlines()
+file.close()
+
+def is_valid_sudoku(matrix, i, j):
+	for k in range(9):
+		if k <> i and matrix[k][j] == matrix[i][j]:
+			return False
+	for k in range(9):
+		if k <> j and matrix[i][k] == matrix[i][j]:
+			return False
+	for k in range(9):
+		x = i - i % 3 + k / 3
+		y = j - j % 3 + k % 3
+		if (x <> i or y <> j) and matrix[x][y] == matrix[i][j]:
+			return False
+	return True
+
+def attempt_sudoku(matrix):
+	for i in range(9):
+		for j in range(9):
+			if matrix[i][j] == 0:
+				for k in range(9):
+					matrix[i][j] = k + 1
+					if is_valid_sudoku(matrix, i, j):
+						if attempt_sudoku(matrix):
+							return True
+				matrix[i][j] = 0
+				return False
+	return True
+
+ans = 0
+for i in range(0, len(data), 10):
+	matrix = [[int(x) for x in line.replace('\n', '')] for line in data[i + 1 : i + 10]]
+	attempt_sudoku(matrix)
+	ans += int(''.join([str(x) for x in matrix[0][:3]]))
+
+print ans

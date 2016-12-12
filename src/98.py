@@ -18,3 +18,31 @@
 # NOTE: All anagrams formed must be contained in the given
 # text file.
 
+from string import maketrans
+
+file = open('../data/p098_words.txt', 'r')
+data = file.read()
+file.close()
+
+strings = data.replace('"', '').split(',')
+
+anagrams = {}
+for s in strings:
+	tmp = ''.join(sorted(s))
+	if tmp not in anagrams:
+		anagrams[tmp] = [s]
+	else:
+		anagrams[tmp].append(s)
+
+pairs = [s[1] for s in filter(lambda x: len(x[1]) > 1, anagrams.items())]
+
+ans = 0
+for pair in pairs:
+	nums = set(filter(lambda x: len((str(x))) == len(pair[0]), [x**2 for x in range(40000)]))
+	for num in nums:
+		tmp1 = pair[1].translate(maketrans(pair[0], str(num)))
+		tmp2 = tmp1.translate(maketrans(str(num), pair[0]))
+		if tmp2 == pair[1] and int(tmp1) in nums:
+			ans = max(ans, max(int(tmp1), num))
+
+print ans
