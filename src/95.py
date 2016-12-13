@@ -19,3 +19,40 @@
 # Find the smallest member of the longest amicable chain with
 # no element exceeding one million.
 
+amicable = {}
+limit = 1000000
+
+sums = [1 for i in range(limit + 1)]
+for i in range(2, limit / 2 + 1):
+	for j in range(i + i, limit + 1, i):
+		sums[j] += i
+
+sums[1] = limit + 1
+
+for i in range(2, limit + 1):
+	if i in amicable:
+		continue
+	num = i
+	seq = [num]
+	while True:
+		num = sums[num]
+		if num in seq:
+			while seq[0] <> num:
+				amicable[seq[0]] = 0
+				seq.pop(0)
+			for j in seq:
+				amicable[j] = len(seq)
+			break
+		if num in amicable or num > limit:
+			for j in seq:
+				amicable[j] = 0
+			break
+		seq.append(num)
+
+ans = 0
+length = 0
+for i in range(2, limit + 1):
+	if amicable[i] > length:
+		ans, length = i, amicable[i]
+
+print ans
