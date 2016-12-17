@@ -16,3 +16,13 @@
 
 # NOTE: This is related to Problem 116.
 
+n = 50
+dp = [0 for i in range(n)]
+count = 1
+for i in range(n):
+	for c in range(2, 5):
+		if i + c - 1 < n:
+			dp[i + c - 1] += count
+	count += dp[i]
+
+print sum(dp) + 1

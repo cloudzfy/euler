@@ -26,3 +26,14 @@
 
 # NOTE: This is related to Problem 117.
 
+n = 50
+ans = 0
+for c in range(2, 5):
+	dp = [0 for i in range(n)]
+	count = 1
+	for i in range(n - c + 1):
+		dp[i + c - 1] += count
+		count += dp[i]
+	ans += sum(dp)
+
+print ans
