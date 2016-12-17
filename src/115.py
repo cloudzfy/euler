@@ -20,3 +20,21 @@
 # For m = 50, find the least value of n for which the fill-count
 # function first exceeds one million.
 
+def fill_count(m, n):
+	dp = [0 for i in range(n)]
+	count = 1
+	for i in range(n - m + 1):
+		if i >= m + 1:
+			count += dp[i - 2]
+		for j in range(m - 1, n - i):
+			dp[i + j] += count
+	return sum(dp) + 1
+
+ans = 51
+limit = 1000000
+while True:
+	if fill_count(50, ans) > limit:
+		break
+	ans += 1
+
+print ans

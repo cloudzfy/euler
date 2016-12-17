@@ -27,3 +27,43 @@
 # find the maximum saving which can be achieved by removing redundant edges
 # whilst ensuring that the network remains connected.
 
+from Queue import PriorityQueue
+
+file = open('../data/p107_network.txt', 'r')
+data = file.read()
+file.close()
+
+matrix = [line.split(',') for line in data.split('\n')[:-1]]
+queue = PriorityQueue()
+total = 0
+n = len(matrix)
+for i in range(n):
+	for j in range(i):
+		if matrix[i][j] <> '-':
+			queue.put((int(matrix[i][j]), i, j))
+			total += int(matrix[i][j])
+
+pre = range(n)
+
+def find(x):
+	if pre[x] <> x:
+		pre[x] = find(pre[x])
+	return pre[x]
+
+def merge(x, y):
+	x = find(x)
+	y = find(y)
+	if x <> y:
+		pre[x] = y
+
+count = 0
+ans = 0
+
+while count < n - 1:
+	(val, x, y) = queue.get()
+	if find(x) <> find(y):
+		merge(x, y)
+		ans += val
+		count += 1
+
+print total - ans

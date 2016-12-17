@@ -13,3 +13,14 @@
 
 # How many numbers below a googol (10^100) are not bouncy?
 
+from math import factorial
+
+def combination(k, n):
+	if k == 0 or k > n:
+		return 1
+	return reduce(lambda x, y: x * y, range(n - k + 1, n + 1)) / factorial(k)
+
+inc = combination(9, 109) - 1
+dec = combination(10, 110) - 1 - 100 * 10
+
+print inc + dec

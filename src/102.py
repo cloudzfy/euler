@@ -18,3 +18,29 @@
 # NOTE: The first two examples in the file represent the triangles
 # in the example given above.
 
+file = open('../data/p102_triangles.txt', 'r')
+data = file.read()
+file.close()
+
+coords = [[int(x) for x in line.split(',')] for line in data.split('\n')[:-1]]
+
+def cross(A, B):
+	return A[0] * B[1] - A[1] * B[0]
+
+def minus(A, B):
+	return [A[0] - B[0], A[1] - B[1]]
+
+def contain_origin(coord):
+	A = coord[0:2]
+	B = coord[2:4]
+	C = coord[4:6]
+	O = [0, 0]
+	for i in range(0, 6, 2):
+		if cross(minus(coord[i:i+2], coord[(i+2)%6:(i+3)%6+1]), \
+			minus(O, coord[(i+2)%6:(i+3)%6+1])) \
+			* cross(minus(coord[(i+4)%6:(i+5)%6+1], coord[(i+2)%6:(i+3)%6+1]), \
+			minus(O, coord[(i+2)%6:(i+3)%6+1])) >=0:
+			return False
+	return True
+
+print sum([1 if contain_origin(coord) else 0 for coord in coords])

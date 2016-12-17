@@ -23,3 +23,14 @@
 # measuring eight units in length you could use red (3), black (1), and
 # red (4).
 
+n = 50
+dp = [0 for i in range(n)]
+
+count = 1
+for i in range(n - 2):
+	if i >= 4:
+		count += dp[i - 2]
+	for j in range(2, n - i):
+		dp[i + j] += count
+
+print sum(dp) + 1

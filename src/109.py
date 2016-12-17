@@ -53,3 +53,40 @@
 # How many distinct ways can a player checkout with a score less than
 # 100?
 
+SX = range(1, 21)
+DX = [2 * x for x in range(1, 21)]
+TX = [3 * x for x in range(1, 21)]
+OBE = 25
+IBE = 50
+
+ends = []
+ends.extend(DX)
+ends.append(IBE)
+ends.sort()
+
+nums = []
+nums.extend(SX)
+nums.extend(DX)
+nums.extend(TX)
+nums.extend([OBE, IBE])
+nums.sort()
+
+limit = 100
+
+ans = 0
+for k in range(len(ends)):
+	if ends[k] < limit:
+		ans += 1
+
+for i in range(len(nums)):
+	for k in range(len(ends)):
+		if nums[i] + ends[k] < limit:
+			ans += 1
+			
+for i in range(len(nums)):
+	for j in range(i, len(nums)):
+		for k in range(len(ends)):
+			if nums[i] + nums[j] + ends[k] < limit:
+				ans += 1
+
+print ans
